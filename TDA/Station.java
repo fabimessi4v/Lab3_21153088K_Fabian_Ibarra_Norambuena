@@ -1,13 +1,20 @@
 package TDA;
 
 public class Station {
-    private int id;
+    public static int ID =0;
+    private int id_station;
     private String name;
     private String stationtype;
     private int stoptime ;
 
-    public Station(int id, String name, String stationtype, int stoptime) {
-        this.id = id;
+    /**
+     * Constructor de TDA Station con ID Autoincremental
+     * @param name
+     * @param stationtype
+     * @param stoptime
+     */
+    public Station(String name, String stationtype, int stoptime) {
+        this.id_station = this.ID++;
         this.name = name;
         if (stationtype.equals("m") ||
                 stationtype.equals("c") ||
@@ -18,13 +25,7 @@ public class Station {
         this.stoptime = stoptime;
     }
 
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -48,5 +49,13 @@ public class Station {
 
     public void setStoptime(int stoptime) {
         this.stoptime = stoptime;
+    }
+
+    public int getId_station() {
+        return id_station;
+    }
+
+    public void setId_station(int id_station) {
+        this.id_station = id_station;
     }
 }
