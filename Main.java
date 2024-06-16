@@ -31,7 +31,9 @@ public class Main {
         l2=new Line("Linea 2","ACSII 24",null);
         l3=new Line("Linea 3","ACSII 24",null);
         System.out.println(l1.line_length());
-
+        System.out.println(l1.line_section_length("Union Latinoamericana","Estacion Central"));
+        System.out.println(l1.line_cost());
+        System.out.println(l1.line_section_cost("Union Latinoamericana","Estacion Central"));
 
     }
 
