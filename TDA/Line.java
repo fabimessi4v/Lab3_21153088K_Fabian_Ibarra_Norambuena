@@ -119,5 +119,22 @@ public class Line {
         return costos_temp.stream().mapToInt(Integer::intValue).sum();
     }
 
+    /**
+     * Metodo que añade una seccion a una linea
+     * @param seccion seccion especifica como entrada
+     */
+    public void line_add_section(Section seccion){
+        this.secciones.add(seccion);
+    }
 
+    /**
+     * Metodo que Determina si un elemento que corresponde a una linea
+     * @param linea
+     * @return Retorna siempre true, ya que las verificaciones relacionadas a los tramos y secciones, se hacen de manera interna en sus implementaciones.
+     * Además no se podria crear una línea sin los requerimientos de esta, puesto que su constructor no lo permite, en esta implementacion.
+     */
+    public boolean isline(Line linea){
+        return true;
+        
+    }
 }
