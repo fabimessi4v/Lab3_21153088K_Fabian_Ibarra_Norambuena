@@ -21,6 +21,7 @@ public class Main {
         Line l3;
         PassengerCar carro1;
         PassengerCar carro2;
+        PassengerCar carro3;
         Train t1;
         List <PassengerCar> carros;
         st1=new Station("Los Heroes","ACSII",23);
@@ -39,8 +40,9 @@ public class Main {
         l1=new Line("Linea 1","ACSII 24",listasecciones);
         l2=new Line("Linea 2","ACSII 24",null);
         l3=new Line("Linea 3","ACSII 24",null);
-        carro1 =new PassengerCar(100,"XFG45","ASCII","C");
+        carro1 =new PassengerCar(100,"XFG45","ASCII","t");
         carro2=new PassengerCar(200,"XFG45","ASCII","C");
+        carro3= new PassengerCar(800,"XFG45","ASCII","t");
         carros=new ArrayList<>();
         carros.add(carro1);
         carros.add(carro2);
@@ -54,6 +56,10 @@ public class Main {
         System.out.println(carro1.getID_passengerCar());
         System.out.println(carro2.getID_passengerCar());
         System.out.println(t1.getTrainID());
+        t1.addCar(carro3,2);
+        System.out.println(t1.getCarList().get(2).getCarType());
+        System.out.println(t1.isTrain());
+        System.out.println(t1.fetchCapacity());
 
     }
 
