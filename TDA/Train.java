@@ -119,4 +119,15 @@ public class Train {
         }
         return capacidades_temp.stream().mapToInt(Integer::intValue).sum();
     }
+
+    @Override
+    public String toString() {
+        return "Train{" +
+                "TrainID=" + TrainID +
+                ", TrainMaker='" + TrainMaker + '\'' +
+                ", speed=" + speed +
+                ", stationStayTime=" + stationStayTime +
+                ", carList=" + carList +
+                '}';
+    }
 }

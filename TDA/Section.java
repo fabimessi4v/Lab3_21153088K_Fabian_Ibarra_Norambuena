@@ -51,4 +51,14 @@ public class Section {
     public void setCost(int cost) {
         this.cost = cost;
     }
+
+    @Override
+    public String toString() {
+        return "Section{" +
+                "station1=" + station1 +
+                ", station2=" + station2 +
+                ", distance=" + distance +
+                ", cost=" + cost +
+                '}';
+    }
 }

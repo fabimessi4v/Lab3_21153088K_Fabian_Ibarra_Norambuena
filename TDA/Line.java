@@ -137,4 +137,14 @@ public class Line {
         return true;
         
     }
+
+    @Override
+    public String toString() {
+        return "Line{" +
+                "ID_line=" + ID_line +
+                ", name='" + name + '\'' +
+                ", rail_type='" + rail_type + '\'' +
+                ", secciones=" + secciones +
+                '}';
+    }
 }

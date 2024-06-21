@@ -28,6 +28,10 @@ public class Main {
         ArrayList<Train> trenes;
         Subway su1;
         ArrayList<Line> lines;
+        Driver d1;
+        Driver d2;
+        Driver d3;
+        ArrayList <Driver> drivers;
         st1=new Station("Los Heroes","ACSII",23);
         st2=new Station("Republica","ACSII",29);
         st3=new Station("Union Latinoamericana","ACSII",34);
@@ -57,9 +61,16 @@ public class Main {
         trenes.add(t2);
         su1= new Subway("Metro de Santiago");
         lines = new ArrayList<>();
+        drivers= new ArrayList<>();
+        d1 = new Driver("Julian Alvarez","ASCII");
+        d2 = new Driver("Rodrigo De Paul","ASCII");
+        d3 = new Driver("Angel Di Maria","ASCII");
         lines.add(l1);
         lines.add(l2);
         lines.add(l3);
+        drivers.add(d1);
+        drivers.add(d2);
+        drivers.add(d3);
         System.out.println(l1.line_length());
         System.out.println(l1.line_section_length("Union Latinoamericana","Estacion Central"));
         System.out.println(l1.line_cost());
@@ -77,7 +88,9 @@ public class Main {
         System.out.println(su1.getTrenes().get(1).getStationStayTime());
         su1.addLine(lines);
         System.out.println(su1.getLineas().get(2).getName());
-
+        su1.addDriver(drivers);
+        System.out.println(su1.getDrivers().get(2).getNombre());
+        System.out.println(su1.toString());
 
 
 

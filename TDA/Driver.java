@@ -35,4 +35,13 @@ public class Driver {
     public void setTrainMaker(String trainMaker) {
         TrainMaker = trainMaker;
     }
+
+    @Override
+    public String toString() {
+        return "Driver{" +
+                "ID_Driver=" + ID_Driver +
+                ", Nombre='" + Nombre + '\'' +
+                ", TrainMaker='" + TrainMaker + '\'' +
+                '}';
+    }
 }

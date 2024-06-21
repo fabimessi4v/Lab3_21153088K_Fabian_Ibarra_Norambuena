@@ -9,12 +9,14 @@ public class Subway {
     private String nombre_Subway;
     List<Train> trenes;
     List<Line> lineas;
+    List<Driver> drivers;
 
     public Subway(String nombre_Subway) {
         this.id_Subway = this.ID++;
         this.nombre_Subway = nombre_Subway;
         this.trenes = new ArrayList<Train>();
         this.lineas = new ArrayList<Line>();
+        this.drivers = new ArrayList<Driver>();
     }
 
     public int getId_Subway() {
@@ -38,6 +40,9 @@ public class Subway {
     public List<Line> getLineas() {
         return lineas;
     }
+    public List<Driver> getDrivers() {
+        return drivers;
+    }
     /**
      * Metodo que agrega uno o más trenes a una red de metro
      * @param train recibe como parametro una lista de trenes que puede estar vacia o no
@@ -55,6 +60,22 @@ public class Subway {
         this.lineas.addAll(lines);
     }
 
+    /**
+     * Metodo que agrega uno o mas conductores a una red de metro
+     * @param drivers recibe como parametro una lista de conductores que puede estar vacia o no
+     */
+    public void addDriver(ArrayList <Driver> drivers) {
+        this.drivers.addAll(drivers);
+    }
 
 
+    @Override
+    public String toString() {
+        return "Representacion de Subway: " + "\n" +
+                "nombre_Subway=" + nombre_Subway + "\n"+
+                "ID de Subway=" + id_Subway+ "\n"+
+                "Datos de trenes=" + trenes + "\n"+
+                "Datos de lineas=" + lineas + "\n"+
+                "Datos de Conductores=" + drivers + "\n";
+    }
 }

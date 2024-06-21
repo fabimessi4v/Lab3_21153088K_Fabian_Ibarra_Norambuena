@@ -55,4 +55,15 @@ public class PassengerCar {
     public void setCarType(String carType) {
         this.carType = carType;
     }
+
+    @Override
+    public String toString() {
+        return "PassengerCar{" +
+                "ID_passengerCar=" + ID_passengerCar +
+                ", passengerCapacity=" + passengerCapacity +
+                ", model='" + model + '\'' +
+                ", trainMaker='" + trainMaker + '\'' +
+                ", carType='" + carType + '\'' +
+                '}';
+    }
 }

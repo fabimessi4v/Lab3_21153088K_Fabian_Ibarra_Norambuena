@@ -58,4 +58,14 @@ public class Station {
     public void setId_station(int id_station) {
         this.id_station = id_station;
     }
+
+    @Override
+    public String toString() {
+        return "Station{" +
+                "id_station=" + id_station +
+                ", name='" + name + '\'' +
+                ", stationtype='" + stationtype + '\'' +
+                ", stoptime=" + stoptime +
+                '}';
+    }
 }
