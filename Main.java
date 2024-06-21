@@ -23,7 +23,11 @@ public class Main {
         PassengerCar carro2;
         PassengerCar carro3;
         Train t1;
+        Train t2;
         List <PassengerCar> carros;
+        ArrayList<Train> trenes;
+        Subway su1;
+        ArrayList<Line> lines;
         st1=new Station("Los Heroes","ACSII",23);
         st2=new Station("Republica","ACSII",29);
         st3=new Station("Union Latinoamericana","ACSII",34);
@@ -47,6 +51,15 @@ public class Main {
         carros.add(carro1);
         carros.add(carro2);
         t1=new Train("ACI233",563,23,carros);
+        t2=new Train("ACI233",663,83,carros);
+        trenes=new ArrayList<>();
+        trenes.add(t1);
+        trenes.add(t2);
+        su1= new Subway("Metro de Santiago");
+        lines = new ArrayList<>();
+        lines.add(l1);
+        lines.add(l2);
+        lines.add(l3);
         System.out.println(l1.line_length());
         System.out.println(l1.line_section_length("Union Latinoamericana","Estacion Central"));
         System.out.println(l1.line_cost());
@@ -60,6 +73,13 @@ public class Main {
         System.out.println(t1.getCarList().get(2).getCarType());
         System.out.println(t1.isTrain());
         System.out.println(t1.fetchCapacity());
+        su1.addTrain(trenes);
+        System.out.println(su1.getTrenes().get(1).getStationStayTime());
+        su1.addLine(lines);
+        System.out.println(su1.getLineas().get(2).getName());
+
+
+
 
     }
 
