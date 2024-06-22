@@ -9,6 +9,7 @@ public class Line {
     String name;
     String rail_type;
     List<Section> secciones;
+    List<Train> trenes;
 
     /**
      * Constructor de TDA Line con ID autoincremental
@@ -22,6 +23,7 @@ public class Line {
         this.name = name;
         this.rail_type = rail_type;
         this.secciones = secciones;
+        this.trenes = new ArrayList<>();
     }
 
 
@@ -55,6 +57,12 @@ public class Line {
 
     public void setID_line(int ID_line) {
         this.ID_line = ID_line;
+    }
+    public List<Train> getTrenes() {
+        return trenes;
+    }
+    public void setTrenes(List<Train> trenes) {
+        this.trenes = trenes;
     }
 
     /**
@@ -147,4 +155,5 @@ public class Line {
                 ", secciones=" + secciones +
                 '}';
     }
+
 }

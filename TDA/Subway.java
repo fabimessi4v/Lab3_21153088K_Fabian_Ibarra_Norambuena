@@ -1,6 +1,7 @@
 package TDA;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Subway {
@@ -68,7 +69,10 @@ public class Subway {
         this.drivers.addAll(drivers);
     }
 
-
+    /**
+     * Metodo que transforma informacion de una red de metro a string
+     * @return String con informacion, para luego ser mostrada por pantalla
+     */
     @Override
     public String toString() {
         return "Representacion de Subway: " + "\n" +
@@ -78,4 +82,64 @@ public class Subway {
                 "Datos de lineas=" + lineas + "\n"+
                 "Datos de Conductores=" + drivers + "\n";
     }
+
+    /**
+     * Metodo que recibe una línea y un tren, y asigna el tren a la línea respectiva
+     * @param train tren como entrada
+     * @param line linea a cual asignar el tren
+     */
+    public void assignTrainToLine(Train train, Line line){
+        int indice_linea=lineas.indexOf(line);
+        this.lineas.get(indice_linea).setTrenes((List<Train>) train);
+    }
+
+    /**
+     * Metodo que recibe distintos atributos y los modifica dento de la clase Train
+     * @param driver
+     * @param train
+     * @param departuretime
+     * @param arrivalstation
+     * @param departurestation
+     */
+    public void assignDriverToTrain(Driver driver, Train train, Date departuretime, Station arrivalstation, Station departurestation){
+    int indice_trenes=trenes.indexOf(train);
+    this.trenes.get(indice_trenes).setConductor(driver);
+    this.trenes.get(indice_trenes).setDeparturetime(departuretime);
+    this.trenes.get(indice_trenes).setArrivalStation(arrivalstation);
+    this.trenes.get(indice_trenes).setDepartureStation(departurestation);
+    }
+
+    /**
+     * Metodo que recibe un tren y una fecha y retorna la informacion del tren
+     * @param train tren de una red de metro
+     * @param date fecha propia del tren
+     * @return String con la informacion del tren
+     */
+    public String whereisTrain(Train train,Date date){
+        int indice_tren=trenes.indexOf(train);
+        String resultado="";
+        if(this.trenes.get(indice_tren).getDeparturetime().equals(date)){
+            resultado = this.trenes.get(indice_tren).toString();
+            return resultado;
+        }
+        return resultado;
+    }
+
+    /**
+     * Metodo que retorna informacion del tren, dada una fecha anterior al recorrido
+     * @param train Tren de la red
+     * @param date fecha anterior al recorrido
+     * @return String con informacion del tren (Recorrido restante, dada la fecha de entrada)
+     */
+    public String trainPath(Train train,Date date){
+        int indice_tren=trenes.indexOf(train);
+        String resultado= "";
+        if(this.trenes.get(indice_tren).getDeparturetime().before(date))
+        {
+            resultado = this.trenes.get(indice_tren).toString();
+            return resultado;
+    }
+        return resultado;
+    }
+
 }

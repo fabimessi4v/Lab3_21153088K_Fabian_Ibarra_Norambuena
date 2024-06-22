@@ -2,6 +2,7 @@ package TDA;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 public class Train {
@@ -11,6 +12,10 @@ public class Train {
     int speed;
     int stationStayTime;
     List<PassengerCar> carList;
+    Driver conductor;
+    Date Departuretime;
+    Station DepartureStation;
+    Station arrivalStation;
 
     public Train(String trainMaker, int speed, int stationStayTime, List<PassengerCar> carList) {
         this.TrainID=ID++;
@@ -18,6 +23,10 @@ public class Train {
         this.speed = speed;
         this.stationStayTime = stationStayTime;
         this.carList = carList;
+        this.Departuretime = new Date();
+        this.DepartureStation = null;
+        this.arrivalStation = null;
+        this.conductor = null;
     }
 
     public int getTrainID() {
@@ -58,6 +67,37 @@ public class Train {
 
     public void setCarList(List<PassengerCar> carList) {
         this.carList = carList;
+    }
+    public Driver getConductor() {
+        return conductor;
+    }
+
+    public void setConductor(Driver conductor) {
+        this.conductor = conductor;
+    }
+
+    public Date getDeparturetime() {
+        return Departuretime;
+    }
+
+    public void setDeparturetime(Date departuretime) {
+        Departuretime = departuretime;
+    }
+
+    public Station getDepartureStation() {
+        return DepartureStation;
+    }
+
+    public void setDepartureStation(Station departureStation) {
+        DepartureStation = departureStation;
+    }
+
+    public Station getArrivalStation() {
+        return arrivalStation;
+    }
+
+    public void setArrivalStation(Station arrivalStation) {
+        this.arrivalStation = arrivalStation;
     }
 
     /**
@@ -130,4 +170,6 @@ public class Train {
                 ", carList=" + carList +
                 '}';
     }
+
+
 }
