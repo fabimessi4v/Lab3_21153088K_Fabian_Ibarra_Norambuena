@@ -9,6 +9,11 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Main {
+    public static ArrayList<Station> estaciones = new ArrayList<>();
+    public static ArrayList<Section> secciones = new ArrayList<>();
+    public static ArrayList<PassengerCar> carros = new ArrayList<>();
+    public static ArrayList<Train> trenes = new ArrayList<>();
+    public static ArrayList<Line> lineas = new ArrayList<>();
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -58,10 +63,10 @@ public class Main {
         while (!volverMenuInicio) {
             System.out.println("\n### Sistema Metro - Cargar información del sistema de metro ###");
             System.out.println("Definiciones estructurales de su sistema subido desde archivos\n");
-            System.out.println("1. Creación de una línea de metro básica");
-            System.out.println("2. Combinaciones entre estaciones entre Líneas (cargar archivo combinaciones.txt)");
-            System.out.println("3. Definición de trenes con distintos número de carros (cargar archivo trenes.txt)");
-            System.out.println("4. Conductores asignados a una Línea (cargar archivo conductores.txt)");
+            System.out.println("1. Creación de estaciones (mediante carga de archivo estaciones.txt)");
+            System.out.println("2. Creación de secciones de estaciones (mediante carga de archivo secciones.txt)");
+            System.out.println("3. Creación de Trenes (mediante carga archivo trenes.txt)");
+            System.out.println("4. Creación de lineas de metro (mediante carga archivo lineas.txt)");
             System.out.println("5. Retorno al menú de Inicio\n");
             System.out.print("Ingrese la opción deseada: ");
 
@@ -70,16 +75,16 @@ public class Main {
 
             switch (opcionCargar) {
                 case 1:
-                    crearlineas();
+                    crearestaciones();
                     break;
                 case 2:
-                    cargarArchivo("combinaciones.txt");
+                    crearsecciones();
                     break;
                 case 3:
-                    cargarArchivo("trenes.txt");
+                    creartrenes();
                     break;
                 case 4:
-                    cargarArchivo("conductores.txt");
+                    crearlineas();
                     break;
                 case 5:
                     volverMenuInicio = true;
@@ -91,8 +96,7 @@ public class Main {
         }
     }
 
-    private static void crearlineas() {
-        ArrayList<Station> stations = new ArrayList<>();
+    private static void crearestaciones() {
 
         try {
             File file = new File("recursos/estaciones.txt");
@@ -108,29 +112,173 @@ public class Main {
                     int stoptime = Integer.parseInt(parts[2].trim());
 
                     Station station = new Station(nombre, stationtime, stoptime);
-                    stations.add(station);
+                    estaciones.add(station);
                 }
             }
 
             scanner.close();
+            System.out.println("-----Se cargaron con exitos las estaciones desde el archivo estaciones.txt-------");
         } catch (FileNotFoundException e) {
             System.out.println("El archivo no se encontró: " + e.getMessage());
         }
 
         // Ahora puedes trabajar con el ArrayList de stations
-        for (Station station : stations) {
-            System.out.println(station.getName()); // Opcional: para imprimir las estaciones leídas
-        }
+
         //Seguir leyendo info de secciones y luego crear lineas
     }
 
+    private static void crearsecciones() {
+        crearestaciones();
+
+        try {
+            File file = new File("recursos/secciones.txt");
+            Scanner scanner = new Scanner(file);
+
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                String[] parts = line.split(",");
+
+                if (parts.length == 2) {
+                    int distance = Integer.parseInt(parts[0].trim());
+                    int cost = Integer.parseInt(parts[1].trim());
+
+                    Section section = new Section(estaciones.get(0),estaciones.get(1),distance,cost);
+                    secciones.add(section);
+                }
+            }
+
+            scanner.close();
+            System.out.println("-----Se cargaron con exitos las secciones desde el archivo secciones.txt-------");
+        } catch (FileNotFoundException e) {
+            System.out.println("El archivo no se encontró: " + e.getMessage());
+        }
+
+        // Ahora puedes trabajar con el ArrayList de stations
+
+        //Seguir leyendo info de secciones y luego crear lineas
+    }
+
+    private static void creartrenes() {
+        crearcarros();
+
+        try {
+            File file = new File("recursos/trenes.txt");
+            Scanner scanner = new Scanner(file);
+
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                String[] parts = line.split(",");
+
+                if (parts.length == 3) {
+                    String trainMaker = parts[0].trim();
+                    int Speed = Integer.parseInt(parts[1].trim());
+                    int stationStayTime = Integer.parseInt(parts[2].trim());
+
+                    Train train = new Train(trainMaker,Speed,stationStayTime,carros);
+                    trenes.add(train);
+                }
+            }
+
+            scanner.close();
+            System.out.println("-----Se cargaron con exito los trenes desde el archivo trenes.txt-------");
+        } catch (FileNotFoundException e) {
+            System.out.println("El archivo no se encontró: " + e.getMessage());
+        }
+
+        // Ahora puedes trabajar con el ArrayList de stations
+
+        //Seguir leyendo info de secciones y luego crear lineas
+    }
+
+
+    private static void crearcarros() {
+
+        try {
+            File file = new File("recursos/carros.txt");
+            Scanner scanner = new Scanner(file);
+
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                String[] parts = line.split(",");
+
+                if (parts.length == 4) {
+                    int capacidad = Integer.parseInt(parts[0].trim());
+                    String modelo = parts[1].trim();
+                    String trainMaker = parts[2].trim();
+                    String carType = parts[3].trim();
+
+                    PassengerCar carro = new PassengerCar(capacidad,modelo,trainMaker,carType);
+                    carros.add(carro);
+                }
+            }
+
+            scanner.close();
+            System.out.println("-----Se cargaron con exitos los carros desde el archivo carros.txt-------");
+        } catch (FileNotFoundException e) {
+            System.out.println("El archivo no se encontró: " + e.getMessage());
+        }
+
+    }
+
+    private static void crearlineas() {
+        crearsecciones();
+
+        try {
+            File file = new File("recursos/lineas.txt");
+            Scanner scanner = new Scanner(file);
+
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                String[] parts = line.split(",");
+
+                if (parts.length == 2) {
+                    String nombre = parts[0].trim();
+                    String rail_type = parts[1].trim();
+
+                    Line linea = new Line(nombre,rail_type,secciones);
+                    lineas.add(linea);
+                }
+            }
+
+            scanner.close();
+            System.out.println("-----Se cargaron con exito las lineas desde el archivo lineas.txt-------");
+            System.out.println(lineas.toString());
+        } catch (FileNotFoundException e) {
+            System.out.println("El archivo no se encontró: " + e.getMessage());
+        }
+
+    }
+
+
+
+
+
+
     public static void menuVisualizarEstado() {
-        System.out.println("\n### Sistema Metro - Visualización del estado actual del sistema de metros ###");
-        System.out.println("Definiciones estructurales de su sistema subido desde archivos\n");
-        System.out.println("1. Desplegar en pantalla el estado actual de la red de metros");
-        System.out.println("2. Retorno al menú de Inicio\n");
-        System.out.print("Ingrese la opción deseada: ");
-        // Aquí se implementaría la lógica para mostrar el estado actual del sistema de metros
+        Scanner scanner = new Scanner(System.in);
+        boolean volverMenuInicio= false;
+        while (!volverMenuInicio) {
+            System.out.println("\n### Sistema Metro - Visualización del estado actual del sistema de metros ###");
+            System.out.println("Definiciones estructurales de su sistema subido desde archivos\n");
+            System.out.println("1. Desplegar en pantalla el estado actual de la red de metros");
+            System.out.println("2. Retorno al menú de Inicio\n");
+            System.out.print("Ingrese la opción deseada: ");
+            int opcion=scanner.nextInt();
+            scanner.nextLine();
+            switch (opcion) {
+                case 1:
+                    System.out.println(" A CONTINUACION SE MUESTRA LA INFROMACION DE LA RED DE METRO ACTUAL");
+                    crearlineas();
+                    break;
+
+                case 2:
+                    volverMenuInicio = true;
+                    break;
+                default:
+                    System.out.println("Opción no válida. Por favor, ingresa una opción válida.");
+                    break;
+            }
+        }
     }
 
     public static void menuInteractuar() {
@@ -160,9 +308,14 @@ public class Main {
             switch (opcionInteractuar) {
                 case 1:
                     System.out.println("Opción 1 seleccionada: lineLength");
+                    for (Line l: lineas){
+                        System.out.printf("El largo de %s es %d%n", l.getName(), l.line_length());
+                    }
                     break;
                 case 2:
                     System.out.println("Opción 2 seleccionada: lineSectionLength");
+                    // hacer     distancia entre secciones: los heroes - republica 200 mt
+                    // ...  y asi
                     break;
                 case 3:
                     System.out.println("Opción 3 seleccionada: lineCost");
@@ -200,12 +353,8 @@ public class Main {
             }
         }
 
-        scanner.close();
     }
 
-    public static void cargarArchivo(String nombreArchivo) {
-        // Aquí iría la lógica para cargar el archivo especificado
-        System.out.println("Cargando archivo: " + nombreArchivo);
-    }
+
 }
 
