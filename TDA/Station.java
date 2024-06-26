@@ -2,10 +2,10 @@ package TDA;
 
 public class Station {
     public static int ID =0;
-    private int id_station;
-    private String name;
-    private String stationtype;
-    private int stoptime ;
+    public int id_station;
+    public String name;
+    public String stationtype;
+    public int stoptime ;
 
     /**
      * Constructor de TDA Station con ID Autoincremental
