@@ -297,9 +297,7 @@ public class Main {
             System.out.println("7. Train - removeCar: remueve un carro de pasajeros de un tren en la posición establecida.");
             System.out.println("8. Train - isTrain: verifica si un tren cumple con las especificaciones de los carros de pasajeros.");
             System.out.println("9. Train - fetchCapacity: entrega la capacidad máxima de pasajeros de un tren.");
-            System.out.println("10. Subway - whereIsTrain: determina la ubicación de un tren a partir de una hora indicada del día.");
-            System.out.println("11. Subway - trainPath: armar el recorrido del tren a partir de una hora especificada y que retorna la lista de estaciones futuras por recorrer.");
-            System.out.println("12. Retorno al menú de Inicio\n");
+            System.out.println("10. Retorno al menú de Inicio\n");
             System.out.print("Ingrese la opción deseada: ");
 
             int opcionInteractuar = scanner.nextInt();
@@ -314,37 +312,88 @@ public class Main {
                     break;
                 case 2:
                     System.out.println("Opción 2 seleccionada: lineSectionLength");
-                    // hacer     distancia entre secciones: los heroes - republica 200 mt
-                    // ...  y asi
+                    String nameStation1;
+                    String nameStation2;
+                    for (int i = 0; i < lineas.size(); i++) {
+                        nameStation1=lineas.get(i).getSecciones().get(i).getStation1().getName();
+                        nameStation2=lineas.get(i).getSecciones().get(i).getStation2().getName();
+                        System.out.printf("El largo de la seccion %s--- %s es: %d%n ", nameStation1,nameStation2, lineas.get(i).line_section_length(nameStation1,nameStation2));
+                    }
                     break;
                 case 3:
                     System.out.println("Opción 3 seleccionada: lineCost");
+                    for (Line l: lineas){
+                        System.out.printf("El costo de %s es %d%n", l.getName(), l.line_cost());
+                    }
                     break;
                 case 4:
                     System.out.println("Opción 4 seleccionada: lineSectionCost");
+
+                    for (int i = 0; i < lineas.size(); i++) {
+                        nameStation1=lineas.get(i).getSecciones().get(i).getStation1().getName();
+                        nameStation2=lineas.get(i).getSecciones().get(i).getStation2().getName();
+                        System.out.printf("El costo de la seccion %s--- %s es: %d%n ", nameStation1,nameStation2, lineas.get(i).line_section_cost(nameStation1,nameStation2));
+                    }
                     break;
                 case 5:
                     System.out.println("Opción 5 seleccionada: isLine");
+                    for (Line l: lineas){
+                        if (l.isline(l)) {
+                            System.out.printf("%s Si cumple los requisitos para ser una linea\n", l.getName());
+                        }
+                        else {
+                            System.out.printf("%s No cumple los requisitos para ser una linea", l.getName());
+                        }
+
+                    }
                     break;
                 case 6:
                     System.out.println("Opción 6 seleccionada: Train - addCar");
+                    creartrenes();
+                    System.out.println("Estado de los trenes antes de ser añadido un carro");
+                    for (Train t: trenes){
+                        System.out.println(t.toString());
+                    }
+                    System.out.println("Estado de los trenes despues de ser añadido un carro en la primera posicion");
+                    for (Train t: trenes){
+                        t.addCar(carros.get(0),0);
+                        System.out.println(t.toString());
+                    }
                     break;
                 case 7:
                     System.out.println("Opción 7 seleccionada: Train - removeCar");
+                    creartrenes();
+                    System.out.println("Estado de los trenes antes de ser eliminado un carro");
+                    for (Train t: trenes){
+                        System.out.println(t.toString());
+                    }
+                    System.out.println("Estado de los trenes despues de ser eliminado un carro en la primera posicion");
+                    for (Train t: trenes){
+                        t.removeCar(0);
+                        System.out.println(t.toString());
+                    }
                     break;
                 case 8:
                     System.out.println("Opción 8 seleccionada: Train - isTrain");
+                    creartrenes();
+                    for (Train t: trenes){
+                        if (t.isTrain()) {
+                            System.out.printf("El tren de id %s Si cumple los requisitos para ser un tren\n", t.getTrainID());
+                        }
+                        else {
+                            System.out.printf("El tren de id %s No cumple los requisitos para ser un tren\n", t.getTrainID());
+                        }
+
+                    }
                     break;
                 case 9:
                     System.out.println("Opción 9 seleccionada: Train - fetchCapacity");
+                    creartrenes();
+                    for (Train t: trenes){
+                        System.out.printf("La capacidad del tren de id %s es %s\n", t.getTrainID(),t.fetchCapacity());
+                    }
                     break;
                 case 10:
-                    System.out.println("Opción 10 seleccionada: Subway - whereIsTrain");
-                    break;
-                case 11:
-                    System.out.println("Opción 11 seleccionada: Subway - trainPath");
-                    break;
-                case 12:
                     volverMenuInicio = true;
                     break;
                 default:
