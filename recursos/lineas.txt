@@ -1,0 +1,3 @@
+Linea 1,ACSII 24
+Linea 2,ACSII 24
+Linea 3,ACSII 24

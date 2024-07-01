@@ -1,0 +1,6 @@
+Los Heroes,ACSII,23
+Republica,ACSII,29
+Union Latinoamericana,ACSII,34
+Estacion Central,ACSII,35
+Lo Espejo,ASCII,21
+Cerrillos,ASCII,22
